@@ -56,7 +56,7 @@
 /******** PortD Registers *******/
 #define PORTD 	(*((volatile uint8 * const)			0x32))
 #define DDRD 	(*((volatile uint8 * const)			0x31))
-#define PIND 	(*((const volatile uint8 *)			0x30))
+#define PIND 	(*((const volatile uint8 * const)	0x30))
 
 /*******************************************************************************
  *                              Type Declarations                              *
