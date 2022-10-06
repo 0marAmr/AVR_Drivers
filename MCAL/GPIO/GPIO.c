@@ -10,7 +10,9 @@
  *
  *******************************************************************************/
 
-#include "GPIO.h"
+#include "gpio.h"
+#include "common_macros.h"
+
 
 /*
  * Description :
@@ -176,10 +178,8 @@ void GPIO_setupPortDirection(uint8 port_num, uint8 direction){
  * If the input port number is not correct, The function will not handle the request.
  */
 void GPIO_writePort(uint8 port_num, uint8 value){
-
 	if(port_num>=NUM_OF_PORTS){
 		/*Do nothing if the port number is greater than or equal the maximum allowed number */
-		return;
 	}
 	else{
 		switch(port_num){
@@ -198,6 +198,7 @@ void GPIO_writePort(uint8 port_num, uint8 value){
 		}
 	}
 }
+
 /*
  * Description :
  * Read and return the value of the required port.
@@ -205,7 +206,7 @@ void GPIO_writePort(uint8 port_num, uint8 value){
  */
 uint8 GPIO_readPort(uint8 port_num){
 	if(port_num>=NUM_OF_PORTS){
-		/*Do nothing if the port number is greater than or equal the maximum allowed number */
+		/* return Logic low if the port number is greater than or equal the maximum allowed number */
 	}
 	else{
 		switch(port_num){
@@ -217,6 +218,111 @@ uint8 GPIO_readPort(uint8 port_num){
 			return PINC;
 		case PORTD_ID:
 			return PIND;
+		}
+	}
+	return LOGIC_LOW;
+}
+
+/*
+ * Description :
+ * Setup the direction of the required nibble of a port as input/output.
+ * If the direction value is PORT_INPUT all pins in the nibble of the port should be input pins.
+ * If the direction value is PORT_OUTPUT all pins n the nibble of the port should be output pins.
+ * The Nibble of a Port is chosen to the be most or the least significant nibble.
+ * If the input port number is not correct, The function will not handle the request.
+ */
+void GPIO_setupNibbleDirection(uint8 port_num, GPIO_PinDirectionType direction, GPIO_NibbleSignificance nibble_choice){
+	if(port_num >= NUM_OF_PORTS){
+		/*Do nothing if the port number is greater than or equal the maximum allowed number */
+	}
+	else{
+		/*Configure the specified pin as input/output*/
+		switch(port_num){
+		case PORTA_ID:
+			if(direction == PIN_OUTPUT){
+				SET_NIBBLE(DDRA,nibble_choice);
+			}
+			else{
+				CLEAR_NIBBLE(DDRA,nibble_choice);
+			}
+			break;
+		case PORTB_ID:
+			if(direction == PIN_OUTPUT){
+				SET_NIBBLE(DDRB,nibble_choice);
+			}
+			else{
+				CLEAR_NIBBLE(DDRB,nibble_choice);
+			}
+			break;
+		case PORTC_ID:
+			if(direction == PIN_OUTPUT){
+				SET_NIBBLE(DDRC,nibble_choice);
+			}
+			else{
+				CLEAR_NIBBLE(DDRC,nibble_choice);
+			}
+			break;
+		case PORTD_ID:
+			if(direction == PIN_OUTPUT){
+				SET_NIBBLE(DDRD,nibble_choice);
+			}
+			else{
+				CLEAR_NIBBLE(DDRD,nibble_choice);
+			}
+			break;
+		}
+
+	}
+}
+
+/*
+ * Description :
+ * Write the value on the required nibble of a specific port.
+ * If any pin in the nibble is output pin the value will be written.
+ * If any pin in the nibble is input pin this will activate/deactivate the internal pull-up resistor.
+ * If the port number is not correct, The function will not handle the request.
+ */
+void GPIO_writeNibble(uint8 port_num, uint8 value, GPIO_NibbleSignificance nibble_choice){
+	if(port_num>=NUM_OF_PORTS){
+		/*Do nothing if the port number is greater than or equal the maximum allowed number */
+	}
+	else{
+		switch(port_num){
+		case PORTA_ID:
+			WRTIE_NIBBLE(PORTA, value, nibble_choice);
+			break;
+		case PORTB_ID:
+			WRTIE_NIBBLE(PORTB, value, nibble_choice);
+			break;
+		case PORTC_ID:
+			WRTIE_NIBBLE(PORTC, value, nibble_choice);
+			break;
+		case PORTD_ID:
+			WRTIE_NIBBLE(PORTD, value, nibble_choice);
+			break;
+		}
+	}
+}
+
+/*
+ * Description :
+ * Read and return the value of the required nibble.
+ * If the input port number is not correct, The function will return ZERO value.
+ */
+uint8 GPIO_readNibble(uint8 port_num, GPIO_NibbleSignificance nibble_choice ){
+	if(port_num>=NUM_OF_PORTS){
+		/* return Logic low if the port number is greater than or equal the maximum allowed number */
+	}
+	else{
+		switch(port_num){
+		case PORTA_ID:
+			return GET_NIBBLE(PORTA,nibble_choice);
+		case PORTB_ID:
+			return GET_NIBBLE(PORTB,nibble_choice);
+		case PORTC_ID:
+			return GET_NIBBLE(PORTC,nibble_choice);
+		case PORTD_ID:
+			return GET_NIBBLE(PORTD,nibble_choice);
 		}
 	}
 	return LOGIC_LOW;

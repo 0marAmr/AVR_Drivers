@@ -1,26 +1,23 @@
  /******************************************************************************
  *
- * [FILE NAME]:     GPIO.h
- * 
- * [AUTHOR]:        Omar Amr
+ * Module: GPIO
  *
- * [DATE]:          01-10-2022
- * 
- * [Description]:   Common - Platform Types Abstraction
+ * File Name: gpio.h
+ *
+ * Description: Header file for the AVR GPIO driver
+ *
+ * Author: Mohamed Tarek
  *
  *******************************************************************************/
-
-#include "../common_macros.h"
-#include "../std_types.h"
 
 #ifndef GPIO_H_
 #define GPIO_H_
 
+#include "std_types.h"
 
 /*******************************************************************************
  *                                Definitions                                  *
  *******************************************************************************/
-
 #define NUM_OF_PORTS           4
 #define NUM_OF_PINS_PER_PORT   8
 
@@ -39,44 +36,42 @@
 #define PIN7_ID                7
 
 /******** PortA Registers *******/
-#define PORTA 	(*((volatile uint8 * const)			0x3B))
-#define DDRA 	(*((volatile uint8 * const)			0x3A))
-#define PINA 	(*((const volatile uint8 *)			0x39))
+#define PORTA 	(*((volatile uint8 * const)0x3B))
+#define DDRA 	(*((volatile uint8 * const)0x3A))
+#define PINA 	(*((const volatile uint8 *)0x39))
 
 /******** PortB Registers *******/
-#define PORTB 	(*((volatile uint8 * const)			0x38))
-#define DDRB 	(*((volatile uint8 * const)			0x37))
-#define PINB 	(*((const volatile uint8 * const)	0x36))
+#define PORTB 	(*((volatile uint8 * const)0x38))
+#define DDRB 	(*((volatile uint8 * const)0x37))
+#define PINB 	(*((const volatile uint8 * const)0x36))
 
 /******** PortC Registers *******/
-#define PORTC 	(*((volatile uint8 * const)			0x35))
-#define DDRC 	(*((volatile uint8 * const)			0x34))
-#define PINC 	(*((const volatile uint8 * const)	0x33))
+#define PORTC 	(*((volatile uint8 * const)0x35))
+#define DDRC 	(*((volatile uint8 * const)0x34))
+#define PINC 	(*((const volatile uint8 * const)0x33))
 
 /******** PortD Registers *******/
-#define PORTD 	(*((volatile uint8 * const)			0x32))
-#define DDRD 	(*((volatile uint8 * const)			0x31))
-#define PIND 	(*((const volatile uint8 * const)	0x30))
-
+#define PORTD 	(*((volatile uint8 * const)0x32))
+#define DDRD 	(*((volatile uint8 * const)0x31))
+#define PIND 	(*((const volatile uint8 *)0x30))
 /*******************************************************************************
- *                              Type Declarations                              *
+ *                               Types Declaration                             *
  *******************************************************************************/
-
-/*-------------------------------------------------------------------------------
- * [Enum Name]: GPIO_PortDirectionType
- * [Enum Description]: signifies the data flow direction of a pin.
- -------------------------------------------------------------------------------*/
-
 typedef enum{
-	PIN_INPUT, PIN_OUTPUT
+	PIN_INPUT,PIN_OUTPUT
 }GPIO_PinDirectionType;
 
 typedef enum{
-	PORT_INPUT,PORT_OUTPUT = 0xFF
+	PORT_INPUT,PORT_OUTPUT=0xFF
 }GPIO_PortDirectionType;
 
+typedef enum{
+	/*LEAST SIGNIFICANT NIBBLE, MOST SIGNIFICANT NIBBLE*/
+	LSN, MSN =4
+}GPIO_NibbleSignificance;
+
 /*******************************************************************************
- *                              Function Prototypes                            *
+ *                              Functions Prototypes                           *
  *******************************************************************************/
 
 /*
@@ -108,7 +103,7 @@ uint8 GPIO_readPin(uint8 port_num, uint8 pin_num);
  * If the direction value is PORT_OUTPUT all pins in this port should be output pins.
  * If the input port number is not correct, The function will not handle the request.
  */
-void GPIO_setupPortDirection(uint8 port_num, uint8 direction);
+void GPIO_setupPortDirection(uint8 port_num, GPIO_PinDirectionType direction);
 
 /*
  * Description :
@@ -126,5 +121,30 @@ void GPIO_writePort(uint8 port_num, uint8 value);
  */
 uint8 GPIO_readPort(uint8 port_num);
 
+/*
+ * Description :
+ * Setup the direction of the required nibble of a port as input/output.
+ * If the direction value is PORT_INPUT all pins in the nibble of the port should be input pins.
+ * If the direction value is PORT_OUTPUT all pins n the nibble of the port should be output pins.
+ * The Nibble of a Port is chosen to the be most or the least significant nibble.
+ * If the input port number is not correct, The function will not handle the request.
+ */
+void GPIO_setupNibbleDirection(uint8 port_num, GPIO_PinDirectionType direction, GPIO_NibbleSignificance nibble_choice);
 
-#endif /*GPIO_H_*/
+/*
+ * Description :
+ * Read and return the value of the required nibble.
+ * If the input port number is not correct, The function will return ZERO value.
+ */
+uint8 GPIO_readNibble(uint8 port_num, GPIO_NibbleSignificance nibble_choice );
+
+/*
+ * Description :
+ * Write the value on the required port.
+ * If any pin in the port is output pin the value will be written.
+ * If any pin in the port is input pin this will activate/deactivate the internal pull-up resistor.
+ * If the input port number is not correct, The function will not handle the request.
+ */
+void GPIO_writeNibble(uint8 port_num, uint8 value, GPIO_NibbleSignificance nibble_choice);
+
+#endif /* GPIO_H_ */
