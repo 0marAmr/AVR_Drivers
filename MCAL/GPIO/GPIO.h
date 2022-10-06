@@ -13,7 +13,7 @@
 #ifndef GPIO_H_
 #define GPIO_H_
 
-#include "std_types.h"
+#include "..\..\std_types.h"
 
 /*******************************************************************************
  *                                Definitions                                  *
