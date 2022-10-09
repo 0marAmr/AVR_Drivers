@@ -1,12 +1,14 @@
- /******************************************************************************
+/******************************************************************************
  *
- * Module: GPIO
+ * [FILE NAME]:     gpio.h
  *
- * File Name: gpio.h
+ * [AUTHOR]:        Omar Amr
  *
- * Description: Header file for the AVR GPIO driver
+ * [DATE]:          01-10-2022
  *
- * Author: Mohamed Tarek
+ * [Description]:   Header file for General IO Driver
+ * 
+ * [TARGET HW]:		ATmega32
  *
  *******************************************************************************/
 
@@ -14,6 +16,7 @@
 #define GPIO_H_
 
 #include "..\..\std_types.h"
+#include "..\..\common_macros.h"
 
 /*******************************************************************************
  *                                Definitions                                  *

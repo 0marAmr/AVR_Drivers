@@ -1,17 +1,18 @@
 /******************************************************************************
  *
- * [FILE NAME]:     GPIO.c
+ * [FILE NAME]:     gpio.h
  *
  * [AUTHOR]:        Omar Amr
  *
  * [DATE]:          01-10-2022
  *
- * [Description]:   Common - Platform Types Abstraction
+ * [DESCRIPTION]:   Source file for General IO Driver
+ * 
+ * [TARGET HW]:		ATmega32
  *
  *******************************************************************************/
 
 #include "gpio.h"
-#include "..\..\common_macros.h"
 
 
 /*
