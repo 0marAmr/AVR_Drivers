@@ -4,7 +4,7 @@
  *
  * [AUTHOR]:        Omar Amr
  *
- * [DATE]:          01-10-2022
+ * [DATE]:          04-10-2022
  *
  * [Description]:   Source file for ADC driver
  *

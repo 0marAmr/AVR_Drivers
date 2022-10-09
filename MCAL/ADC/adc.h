@@ -4,7 +4,7 @@
  *
  * [AUTHOR]:        Omar Amr
  *
- * [DATE]:          01-10-2022
+ * [DATE]:          0401-10-2022
  *
  * [Description]:   Header file for ADC driver
  *
