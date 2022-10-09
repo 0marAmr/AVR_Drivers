@@ -10,8 +10,8 @@
  *
  *******************************************************************************/
 
+#include "../../MCAL/GPIO/gpio.h"
 #include "lcd.h"
-#include "..\MCAL\GPIO\gpio.h"
 #include <util/delay.h>
 #include <stdlib.h>
 
