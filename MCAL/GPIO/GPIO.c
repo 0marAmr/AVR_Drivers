@@ -1,6 +1,6 @@
 /******************************************************************************
  *
- * [FILE NAME]:     gpio.h
+ * [FILE NAME]:     gpio.c
  *
  * [AUTHOR]:        Omar Amr
  *
@@ -232,7 +232,7 @@ uint8 GPIO_readPort(uint8 port_num){
  * The Nibble of a Port is chosen to the be most or the least significant nibble.
  * If the input port number is not correct, The function will not handle the request.
  */
-void GPIO_setupNibbleDirection(uint8 port_num, GPIO_PinDirectionType direction, GPIO_NibbleSignificance nibble_choice){
+void GPIO_setupNibbleDirection(uint8 port_num, GPIO_NibbleDirectionType direction, GPIO_NibbleSignificance nibble_choice){
 	if(port_num >= NUM_OF_PORTS){
 		/*Do nothing if the port number is greater than or equal the maximum allowed number */
 	}
@@ -240,7 +240,7 @@ void GPIO_setupNibbleDirection(uint8 port_num, GPIO_PinDirectionType direction, 
 		/*Configure the specified pin as input/output*/
 		switch(port_num){
 		case PORTA_ID:
-			if(direction == PIN_OUTPUT){
+			if(direction == NIBBLE_OUTPUT){
 				SET_NIBBLE(DDRA,nibble_choice);
 			}
 			else{
@@ -248,7 +248,7 @@ void GPIO_setupNibbleDirection(uint8 port_num, GPIO_PinDirectionType direction, 
 			}
 			break;
 		case PORTB_ID:
-			if(direction == PIN_OUTPUT){
+			if(direction == NIBBLE_OUTPUT){
 				SET_NIBBLE(DDRB,nibble_choice);
 			}
 			else{
@@ -256,7 +256,7 @@ void GPIO_setupNibbleDirection(uint8 port_num, GPIO_PinDirectionType direction, 
 			}
 			break;
 		case PORTC_ID:
-			if(direction == PIN_OUTPUT){
+			if(direction == NIBBLE_OUTPUT){
 				SET_NIBBLE(DDRC,nibble_choice);
 			}
 			else{
@@ -264,7 +264,7 @@ void GPIO_setupNibbleDirection(uint8 port_num, GPIO_PinDirectionType direction, 
 			}
 			break;
 		case PORTD_ID:
-			if(direction == PIN_OUTPUT){
+			if(direction == NIBBLE_OUTPUT){
 				SET_NIBBLE(DDRD,nibble_choice);
 			}
 			else{

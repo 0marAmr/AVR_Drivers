@@ -57,12 +57,17 @@
 #define PORTD 	(*((volatile uint8 * const)0x32))
 #define DDRD 	(*((volatile uint8 * const)0x31))
 #define PIND 	(*((const volatile uint8 *)0x30))
+
 /*******************************************************************************
  *                               Types Declaration                             *
  *******************************************************************************/
 typedef enum{
 	PIN_INPUT,PIN_OUTPUT
 }GPIO_PinDirectionType;
+
+typedef enum{
+	NIBBLE_INPUT, NIBBLE_OUTPUT
+}GPIO_NibbleDirectionType;
 
 typedef enum{
 	PORT_INPUT,PORT_OUTPUT=0xFF
@@ -132,7 +137,7 @@ uint8 GPIO_readPort(uint8 port_num);
  * The Nibble of a Port is chosen to the be most or the least significant nibble.
  * If the input port number is not correct, The function will not handle the request.
  */
-void GPIO_setupNibbleDirection(uint8 port_num, GPIO_PinDirectionType direction, GPIO_NibbleSignificance nibble_choice);
+void GPIO_setupNibbleDirection(uint8 port_num, GPIO_NibbleDirectionType direction, GPIO_NibbleSignificance nibble_choice);
 
 /*
  * Description :
