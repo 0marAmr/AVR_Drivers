@@ -17,7 +17,6 @@
 
 #include "..\..\common_macros.h"
 #include "..\..\std_types.h"
-
 /*******************************************************************************
  *                                Definitions                                  *
  *******************************************************************************/
@@ -55,6 +54,7 @@
  *                         Types Declaration                                   *
  *******************************************************************************/
 
+/* ADC Vref source type*/
 typedef enum{
 	ADC_ExternalAREF,				/*External reference voltage on AREF pin */
 	ADC_AVcc,						/*Analog Vcc which is 5 volts*/
@@ -62,16 +62,22 @@ typedef enum{
 	ADC_InternalVoltageRef = 3,		/* 2.56 internal voltage*/
 }ADC_ReferenceVolatge;
 
-/*Pre-scaler type definition.*/
+/*Pre-scaler factors definition.*/
 typedef enum{
 	 F_CPU_2 = 1, F_CPU_4, F_CPU_8, F_CPU_16, F_CPU_32, F_CPU_64, F_CPU_128
 }ADC_Prescaler;
+
+/*ADC input channels*/
+typedef enum{
+	ADC_ch0, ADC_ch1, ADC_ch2, ADC_ch3, ADC_ch4, ADC_ch5, ADC_ch6, ADC_ch7
+}ADC_SingleEndedIp;
 
 /*Structure contains the configuration of ADC: Pre-scaler and reference voltage choice*/
 typedef struct{
 	ADC_ReferenceVolatge ref_volt;
 	ADC_Prescaler prescaler;
 }ADC_ConfigType;
+
 
 
 /*******************************************************************************
@@ -89,7 +95,7 @@ void ADC_init(const ADC_ConfigType * Config_Ptr);
  * Function responsible for read analog data from a certain ADC channel
  * and convert it to digital using the ADC driver.
  */
-uint16 ADC_readChannel(const uint8 channel_number);
+uint16 ADC_readChannel(const ADC_SingleEndedIp channel_number);
 
 
 #endif
