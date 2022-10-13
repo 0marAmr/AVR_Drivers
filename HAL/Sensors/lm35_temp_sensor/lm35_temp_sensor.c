@@ -10,9 +10,22 @@
  *
  *******************************************************************************/
 
+#include "../../../MCAL/GPIO/gpio.h"
 #include "../../../MCAL/ADC/adc.h"
 #include "lm35_temp_sensor.h"
 
+
+/*******************************************************************************
+ *                      Functions Definitions                                  *
+ *******************************************************************************/
+
+/*
+ * Description :
+ * Function configures the specified input pin for the sensor
+ */
+void LM35_init(void){
+ GPIO_setupPinDirection(LM35_PORT_ID, LM35_PIN_ID, PIN_INPUT);
+}
 
 /*
  * Description :
