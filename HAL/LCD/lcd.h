@@ -40,21 +40,18 @@
 #endif
 
 /*LCD Hardware Ports and Pin definitions*/
-#define LCD_RS_PORT_ID 		PORTA_ID 		/*REGISTER SELECT PORT ID*/
+#define LCD_RS_PORT_ID 		PORTB_ID 		/*REGISTER SELECT PORT ID*/
 #define LCD_RS_PIN_ID 		PIN1_ID			/*REGISTER SELECT PIN ID */
 
-#define LCD_E_PORT_ID		PORTA_ID		/*LCD ENABLE PORT ID*/
+#define LCD_E_PORT_ID		PORTB_ID		/*LCD ENABLE PORT ID*/
 #define LCD_E_PIN_ID		PIN2_ID			/*LCD ENABLE PIN ID */
 
-#define LCD_DATA_PORT_ID	PORTA_ID		/*LCD Bi-directional DATA bus PORT ID for DATA and COMMANDS*/
+#define LCD_DATA_PORT_ID	PORTD_ID		/*LCD Bi-directional DATA bus PORT ID for DATA and COMMANDS*/
 
 #if (LCD_DATA_BITS_MODE == 4)
 
-/*LCD pins used with the 4-bit mode*/
-#define LCD_DB4_PIN_ID                 PIN3_ID
-#define LCD_DB5_PIN_ID                 PIN4_ID
-#define LCD_DB6_PIN_ID                 PIN5_ID
-#define LCD_DB7_PIN_ID                 PIN6_ID
+/*The first pin in the nibble connected to the LCD */
+#define LCD_DATA_PIN_1_ID 	PIN0_ID
 
 #endif
 

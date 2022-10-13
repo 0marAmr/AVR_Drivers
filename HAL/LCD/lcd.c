@@ -38,7 +38,7 @@ void LCD_init(void){
 
 #elif(LCD_DATA_BITS_MODE == 4)
 	/*configure data/command port as output port */
-	GPIO_setupNibbleDirection(LCD_DATA_PORT_ID, PORT_OUTPUT, PIN3_ID);
+	GPIO_setupNibbleDirection(LCD_DATA_PORT_ID, PORT_OUTPUT, LCD_DATA_PIN_1_ID);
 
 	/*initialize 4-bit mode*/
 	LCD_sendCommand(LCD_TWO_LINES_FOUR_BITS_MODE_INIT1);
@@ -67,7 +67,7 @@ void LCD_sendCommand(uint8 command){
 
 #elif (LCD_DATA_BITS_MODE ==4)
 
-	GPIO_writeNibble(LCD_DATA_PORT_ID, GET_NIBBLE(command,MSN), PIN3_ID);
+	GPIO_writeNibble(LCD_DATA_PORT_ID, GET_NIBBLE(command,MSN), LCD_DATA_PIN_1_ID);
 	_delay_ms(1);
 
 	GPIO_writePin(LCD_E_PORT_ID, LCD_E_PIN_ID, LOGIC_LOW);
@@ -75,7 +75,7 @@ void LCD_sendCommand(uint8 command){
 	GPIO_writePin(LCD_E_PORT_ID, LCD_E_PIN_ID, LOGIC_HIGH);
 	_delay_ms(1);
 
-	GPIO_writeNibble(LCD_DATA_PORT_ID, GET_NIBBLE(command,LSN), PIN3_ID);
+	GPIO_writeNibble(LCD_DATA_PORT_ID, GET_NIBBLE(command,LSN), LCD_DATA_PIN_1_ID);
 
 #endif
 	_delay_ms(1);
@@ -97,7 +97,7 @@ void LCD_displayCharacter(uint8 data){
 	GPIO_writePort(LCD_DATA_PORT_ID, data);
 
 #elif (LCD_DATA_BITS_MODE == 4)
-	GPIO_writeNibble(LCD_DATA_PORT_ID,  GET_NIBBLE(data,MSN), PIN3_ID);
+	GPIO_writeNibble(LCD_DATA_PORT_ID,  GET_NIBBLE(data,MSN), LCD_DATA_PIN_1_ID);
 	_delay_ms(1);
 
 	GPIO_writePin(LCD_E_PORT_ID, LCD_E_PIN_ID, LOGIC_LOW);
@@ -105,7 +105,7 @@ void LCD_displayCharacter(uint8 data){
 	GPIO_writePin(LCD_E_PORT_ID, LCD_E_PIN_ID, LOGIC_HIGH);
 	_delay_ms(1);
 
-	GPIO_writeNibble(LCD_DATA_PORT_ID,  GET_NIBBLE(data,LSN), PIN3_ID );
+	GPIO_writeNibble(LCD_DATA_PORT_ID,  GET_NIBBLE(data,LSN), LCD_DATA_PIN_1_ID);
 
 #endif
 
