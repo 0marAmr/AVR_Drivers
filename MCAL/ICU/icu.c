@@ -6,7 +6,7 @@
  *
  * [DATE]:          04-10-2022
  *
- * [Description]:   Source file for ADC driver
+ * [Description]:   Source file for Input Capture Unit driver
  *
  * [TARGET HW]:		ATmega32
  *
