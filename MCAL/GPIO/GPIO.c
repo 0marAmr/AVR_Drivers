@@ -148,7 +148,7 @@ uint8 GPIO_readPin(uint8 port_num, uint8 pin_num){
  * If the direction value is PORT_OUTPUT all pins in this port should be output pins.
  * If the input port number is not correct, The function will not handle the request.
  */
-void GPIO_setupPortDirection(uint8 port_num, uint8 direction){
+void GPIO_setupPortDirection(uint8 port_num, GPIO_PinDirectionType direction){
 	if(port_num >= NUM_OF_PORTS){
 		/*Do nothing if the port number is greater than or equal the maximum allowed number */
 	}
