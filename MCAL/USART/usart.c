@@ -117,7 +117,7 @@ void USART_receiveString(uint8 * const a_rxStrPtr){
 	do{
 		a_rxStrPtr[i] = USART_receiveByte();
 	}
-	while(a_rxStrPtr[i++] != TERMINATOR_CHAR);
+	while(a_rxStrPtr[i++] != TERMINATOR_CHARACTER);
 
 	/*replacing  the retminator character with a null terminator*/
 	a_rxStrPtr[--i] = '\0';
