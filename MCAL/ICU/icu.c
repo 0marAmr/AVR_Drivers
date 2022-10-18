@@ -19,8 +19,6 @@
  *                           Global Variables                                  *
  *******************************************************************************/
 
-
-
 /* holds the address of the call back function in the application */
 static volatile void (*g_CallBack_Ptr) (void) = NULL_PTR;
 
@@ -45,7 +43,7 @@ ISR(TIMER1_CAPT_vect){
  * 	3. Enable the Input Capture Interrupt.
  * 	4. Initialize Timer1 Registers
  */
-void ICU_init(const ICU_ConfigType * a_configuration){
+void ICU_init(const ICU_ConfigType * a_configPtr){
 
 	/* Initially the timer value is 0*/
 	TCNT1 = 0;
@@ -60,7 +58,7 @@ void ICU_init(const ICU_ConfigType * a_configuration){
 	TCCR1A = (1<<FOC1A) | (1<<FOC1B);
 
 	/*Configure the Input Capture Edge Select bit*/
-	if(a_configuration->edge == RISING_EDGE){
+	if(a_configPtr->edge == RISING_EDGE){
 		SET_BIT(TCCR1B,ICES1);
 	}
 	else{
@@ -72,22 +70,22 @@ void ICU_init(const ICU_ConfigType * a_configuration){
 
 
 	/*insert the required clock value in LSBs (CS10, CS11 and CS12) to start the timer*/
-	TCCR1B |= (a_configuration->prescaler);
+	TCCR1B |= (a_configPtr->prescaler);
 }
 
 /*
  * Description: Function to set the Call Back function address.
  */
-void ICU_setCallBackFunc(void (*a_functio_address) (void)){
+void ICU_setCallBackFunc(void (*a_functionAddressPtr) (void)){
 	/* Save the address of the Call back function in a global variable */
-	g_CallBack_Ptr = 	a_functio_address;
+	g_CallBack_Ptr = 	a_functionAddressPtr;
 }
 
 /*
  * Description: Function to set the required edge detection.
  */
-void ICU_setEdgeDetectionType(ICU_EdgeSelect a_edge_type){
-	if(a_edge_type == RISING_EDGE){
+void ICU_setEdgeDetectionType(ICU_EdgeSelect a_edgeType){
+	if(a_edgeType == RISING_EDGE){
 		SET_BIT(TCCR1B,ICES1);
 	}
 	else{

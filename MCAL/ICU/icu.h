@@ -16,8 +16,8 @@
 #ifndef ICU_H_
 #define ICU_H_
 
-#include "../../common_macros.h"
-#include "../../std_types.h"
+#include "../../Utils/std_types.h"
+#include "../../Utils/common_macros.h"
 
 /*******************************************************************************
  *                                Definitions                                  *
@@ -85,17 +85,17 @@ void ICU_clearTimerValue(void);
  * 	3. Enable the Input Capture Interrupt.
  * 	4. Initialize Timer1 Registers
  */
-void ICU_init(const ICU_ConfigType * const  icu_configuration);
+void ICU_init(const ICU_ConfigType * a_configPtr);
 
 /*
  * Description: Function to set the Call Back function address.
  */
-void ICU_setCallBackFunc(void (*call_back_functio_address) (void));
+void ICU_setCallBackFunc(void (*a_functionAddressPtr) (void));
 
 /*
  * Description: Function to set the required edge detection.
  */
-void ICU_setEdgeDetectionType(ICU_EdgeSelect edge_type);
+void ICU_setEdgeDetectionType(ICU_EdgeSelect a_edgeType);
 
 
 /*
