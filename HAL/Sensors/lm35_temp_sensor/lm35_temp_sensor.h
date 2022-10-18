@@ -13,7 +13,8 @@
 #ifndef LM35__TEMP_SENSOR_H_
 #define LM35__TEMP_SENSOR_H_
 
-#include "../../../std_types.h"
+#include "../../../Utils/std_types.h"
+
 
 /*******************************************************************************
  *                                Definitions                                  *

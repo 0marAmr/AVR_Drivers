@@ -13,7 +13,7 @@
 #ifndef DC_MOTOR_H_
 #define DC_MOTOR_H_
 
-#include "../../../std_types.h"
+#include "../../../Utils/std_types.h"
 
 /*******************************************************************************
  *                                Definitions                                  *

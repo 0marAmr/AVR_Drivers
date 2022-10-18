@@ -13,8 +13,8 @@
 #ifndef LCD_H_
 #define LCD_H_
 
-#include "..\..\std_types.h"
-#include "..\..\common_macros.h"
+#include "../../Utils/std_types.h"
+#include "../../Utils/common_macros.h"
 
 /*******************************************************************************
  *                                Definitions                                  *
