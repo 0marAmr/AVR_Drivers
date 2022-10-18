@@ -25,7 +25,7 @@
  * 2. Enable the USART.
  * 3. Setup the USART baud rate.
  */
-void USART_init(const USART_ConfigType * const a_usartConfig){
+void USART_init(const USART_ConfigType * const a_usartConfigPtr){
 	uint16 reg_UBRR_value = 0;
 
 	/* U2X = 1 for double transmission speed */
@@ -40,7 +40,7 @@ void USART_init(const USART_ConfigType * const a_usartConfig){
 	 * UCSZ2 = 1/0 For 9/other data bit mode
 	 * RXB8 & TXB8 not used for 8-bit data mode
 	 ***********************************************************************/
-	UCSRB = ((a_usartConfig->bit_mode & 0x04) << UCSZ2) | (1<<TXEN) | (1<<RXEN);
+	UCSRB = ((a_usartConfigPtr->bit_mode & 0x04) << UCSZ2) | (1<<TXEN) | (1<<RXEN);
 
 	/************************** UCSRC Description **************************
 	 * URSEL   = 1 The URSEL must be one when writing the UCSRC
@@ -49,16 +49,16 @@ void USART_init(const USART_ConfigType * const a_usartConfig){
 	 * USBS    = 0/1 One/Two stop bit(s)
 	 * UCSZ1:0  (data bits mode config.)
 	 ***********************************************************************/
-	UCSRC = (1 << URSEL) | (a_usartConfig->mode << UMSEL) | (a_usartConfig->parity << UPM0)\
-			| ( a_usartConfig->stop_bits << USBS) | ((a_usartConfig->bit_mode & 0x03) << UCSZ0);
+	UCSRC = (1 << URSEL) | (a_usartConfigPtr->mode << UMSEL) | (a_usartConfigPtr->parity << UPM0)\
+			| ( a_usartConfigPtr->stop_bits << USBS) | ((a_usartConfigPtr->bit_mode & 0x03) << UCSZ0);
 
-	if(a_usartConfig->mode == SYNCHRONOUS){
+	if(a_usartConfigPtr->mode == SYNCHRONOUS){
 		/* UCPOL   	(clock configuration for Async. mode)*/
-		UCSRC |= (a_usartConfig->clock_config << UCPOL);
+		UCSRC |= (a_usartConfigPtr->clock_config << UCPOL);
 	}
 
 	/* Calculate the UBRR register value */
-	reg_UBRR_value = (uint16)( ( F_CPU / (8UL * a_usartConfig->baud_rate) ) - 1 );
+	reg_UBRR_value = (uint16)( ( F_CPU / (8UL * a_usartConfigPtr->baud_rate) ) - 1 );
 
 	/*Clear URSEL to write in UBRRH Register*/
 	CLEAR_BIT(UBRRH,URSEL);
@@ -117,8 +117,8 @@ void USART_receiveString(uint8 * const a_rxStrPtr){
 	do{
 		a_rxStrPtr[i] = USART_receiveByte();
 	}
-	while(a_rxStrPtr[i++] != TERMINATOR_CHARACTER);
+	while(a_rxStrPtr[i++] != USART_TERMINATOR_CHARACTER);
 
 	/*replacing  the retminator character with a null terminator*/
-	a_rxStrPtr[--i] = '\0';
+	a_rxStrPtr[i-1] = '\0';
 }

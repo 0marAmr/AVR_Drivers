@@ -22,8 +22,8 @@
  *                                Definitions                                  *
  *******************************************************************************/
 
-#define TERMINATOR_CHARACTER 	'#'
-#define RECEIVER_READY_BYTE		0x66 /*Byte sent from receiver when it is ready to receive*/
+#define USART_TERMINATOR_CHARACTER 		'#'  /*A special character denoting the end of a string*/
+#define USART_RECEIVER_READY_BYTE		0x66 /*Byte sent from receiver when it is ready to receive*/
 
 /*Mapped Peripheral registers addresses definitions*/
 #define UCSRA (*( (volatile uint8 * const) 	0x2B))
