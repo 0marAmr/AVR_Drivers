@@ -15,8 +15,9 @@
 #ifndef ADC_H_
 #define ADC_H_
 
-#include "..\..\common_macros.h"
-#include "..\..\std_types.h"
+#include "../../Utils/std_types.h"
+#include "../../Utils/common_macros.h"
+
 /*******************************************************************************
  *                                Definitions                                  *
  *******************************************************************************/
