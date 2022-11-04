@@ -40,7 +40,7 @@ void USART_init(const USART_ConfigType * const a_usartConfigPtr){
 	 * UCSZ2 = 1/0 For 9/other data bit mode
 	 * RXB8 & TXB8 not used for 8-bit data mode
 	 ***********************************************************************/
-	UCSRB = ((a_usartConfigPtr->usart_bit_mode & 0x04)) | (1<<TXEN) | (1<<RXEN);
+	UCSRB = ((a_usartConfigPtr->usart_bit_mode & 0x04) << UCSZ2) | (1<<TXEN) | (1<<RXEN);
 
 	/************************** UCSRC Description **************************
 	 * URSEL   = 1 The URSEL must be one when writing the UCSRC
