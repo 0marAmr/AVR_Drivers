@@ -40,7 +40,7 @@ void USART_init(const USART_ConfigType * const a_usartConfigPtr){
 	 * UCSZ2 = 1/0 For 9/other data bit mode
 	 * RXB8 & TXB8 not used for 8-bit data mode
 	 ***********************************************************************/
-	UCSRB = ((a_usartConfigPtr->bit_mode & 0x04) << UCSZ2) | (1<<TXEN) | (1<<RXEN);
+	UCSRB = ((a_usartConfigPtr->usart_bit_mode & 0x04)) | (1<<TXEN) | (1<<RXEN);
 
 	/************************** UCSRC Description **************************
 	 * URSEL   = 1 The URSEL must be one when writing the UCSRC
@@ -49,16 +49,16 @@ void USART_init(const USART_ConfigType * const a_usartConfigPtr){
 	 * USBS    = 0/1 One/Two stop bit(s)
 	 * UCSZ1:0  (data bits mode config.)
 	 ***********************************************************************/
-	UCSRC = (1 << URSEL) | (a_usartConfigPtr->mode << UMSEL) | (a_usartConfigPtr->parity << UPM0)\
-			| ( a_usartConfigPtr->stop_bits << USBS) | ((a_usartConfigPtr->bit_mode & 0x03) << UCSZ0);
+	UCSRC = (1 << URSEL) | (a_usartConfigPtr->usart_mode << UMSEL) | (a_usartConfigPtr->usart_parity << UPM0)\
+			| ( a_usartConfigPtr->usart_stop_bits << USBS) | ((a_usartConfigPtr->usart_bit_mode & 0x03) << UCSZ0);
 
-	if(a_usartConfigPtr->mode == SYNCHRONOUS){
+	if(a_usartConfigPtr->usart_mode == SYNCHRONOUS){
 		/* UCPOL   	(clock configuration for Async. mode)*/
-		UCSRC |= (a_usartConfigPtr->clock_config << UCPOL);
+		UCSRC |= (a_usartConfigPtr->usart_clock_config << UCPOL);
 	}
 
 	/* Calculate the UBRR register value */
-	reg_UBRR_value = (uint16)( ( F_CPU / (8UL * a_usartConfigPtr->baud_rate) ) - 1 );
+	reg_UBRR_value = (uint16)( ( F_CPU / (8UL * a_usartConfigPtr->usart_baud_rate) ) - 1 );
 
 	/*Clear URSEL to write in UBRRH Register*/
 	CLEAR_BIT(UBRRH,URSEL);

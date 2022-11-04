@@ -23,7 +23,8 @@
  *******************************************************************************/
 
 #define USART_TERMINATOR_CHARACTER 		'#'  /*A special character denoting the end of a string*/
-#define USART_RECEIVER_READY_BYTE		0x66 /*Byte sent from receiver when it is ready to receive*/
+#define USART_SENDER_READY_BYTE			0x06 /*Byte sent from sender when it is ready to receive*/
+#define USART_RECEIVER_READY_BYTE		0x06 /*Byte sent from receiver when it is ready to receive*/
 
 /*Mapped Peripheral registers addresses definitions*/
 #define UCSRA (*( (volatile uint8 * const) 	0x2B))
@@ -68,7 +69,7 @@
  *******************************************************************************/
 
 typedef enum{
-	DISABLED, EVEN_PARITY = 2, ODD_PARITY
+	PARITY_DISABLED, EVEN_PARITY = 2, ODD_PARITY
 }USART_ParityType;
 
 typedef enum{
@@ -88,12 +89,12 @@ typedef enum{
 }USART_ClockPolarity;
 
 typedef struct{
-	uint32 baud_rate;
-	USART_BitMode bit_mode;
-	USART_StopBitsSelect stop_bits;
-	USART_ModeSelect mode;
-	USART_ParityType parity;
-	USART_ClockPolarity clock_config;
+	uint32 usart_baud_rate;
+	USART_BitMode usart_bit_mode;
+	USART_StopBitsSelect usart_stop_bits;
+	USART_ModeSelect usart_mode;
+	USART_ParityType usart_parity;
+	USART_ClockPolarity usart_clock_config;
 }USART_ConfigType;
 
 /*******************************************************************************
