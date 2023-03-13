@@ -1,7 +1,8 @@
 # AVR_Drivers
 ### This repository contains drivers for the AVR ATmega32 microcontroller. The drivers are divided into three directories:
 
-- MCAL: This directory contains drivers for the AVR ATmega32's Microcontroller Abstraction Layer. The drivers included in this directory are:
+- MCAL: This directory contains drivers for the AVR ATmega32's Microcontroller Abstraction Layer. It abstracts away the low-level hardware details of the mcu, providing a higher-level interface for working with hardware peripherals. The drivers included in this directory are:
+
     * ADC
     * GPIO
     * i2C
@@ -9,9 +10,9 @@
     * SPI
     * Timer
     * USART
+     such as
     
-    
-- HAL: This directory contains drivers for the AVR ATmega32's Hardware Abstraction Layer. The drivers included in this directory are:
+- HAL: This directory contains drivers for the AVR ATmega32's Hardware Abstraction Layer. It provides an even higher-level interface for working with commonly used hardware peripherals. The drivers included in this directory are:
 
     * Button
     * Buzzer
